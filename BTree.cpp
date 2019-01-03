@@ -299,7 +299,7 @@ void travse(BTree t){
     }
     return;
 }
-
+ 
 void destroy(BTree &t){
       int i =0;
      if(NULL==t ) return;     
@@ -308,6 +308,19 @@ void destroy(BTree &t){
      }
      free(t);
     // t = NULL;
+}
+void destr(BTree &t){
+      while(t!=NULL)
+      deleteBTree(t,t->key[1]);
+}
+
+void menu(){
+	printf("======菜单栏=====\n");
+	printf("1:插入新元素\n");
+	printf("2:凹表输出\n");
+	printf("3:中序遍历\n"); 
+    printf("4:删除元素\n");
+    printf("=================\n");
 }
 int main()
 {
@@ -318,29 +331,38 @@ int main()
       int key ;
       while(TRUE){
         int n = 0;
+        menu(); 
         printf("请输入操作: ");
         scanf("%d",&n);
-        if(n<0||n>4) continue;
+        if(n<0||n>5) continue;
         switch(n){        
           case 1:
              key = 0;
              scanf("%d",&key);
              insertBTree(t,key);
+             printf("=================\n");
              printBTree(t,lev);
+             printf("=================\n");
              break;
           case 2 :
-                printBTree(t,lev);
-                break;
+             printf("=================\n");
+             printBTree(t,lev);
+             printf("=================\n");
+             break;
           case 3: 
-               travse(t);
-               printf("\n");
-                break;
-         case 4:               
-              scanf("%d",&key);
-
-              deleteBTree(t,key );
-              printBTree(t,lev);
-              break;         
+             travse(t);
+             printf("\n");
+             break;
+          case 4:               
+             scanf("%d",&key);
+             deleteBTree(t,key );
+             printf("=================\n");
+             printBTree(t,lev);
+             printf("=================\n");
+              break; 
+         case 5 :destr(t);
+                 printf("B树已销毁\n");
+                 break;
          default : 
                getchar();
                return 0;
